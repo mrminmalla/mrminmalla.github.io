@@ -11,7 +11,9 @@
 </head>
 <body>
     <!-- Header - Sticky -->
+    <div class="site-wrapper">
     <header class="header">
+    <div class="container">
     <a class="logo" href="/">Min Malla</a>
     <nav class="desktop-nav">
         <a href="#about">About</a>
@@ -26,6 +28,7 @@
     <button class="mobile-menu-button" id="mobileMenuButton">
         <i class="fas fa-bars"></i>
     </button>
+</div>
 </header>
 
     <!-- Mobile Menu -->
@@ -37,7 +40,7 @@
                 <a href="#education">Education</a>
                 <a href="#services">Services</a>
                 <a href="#contact">Contact</a>
-                <button class="btn btn-primary mt-4">Get in Touch</button>
+                <!--<button class="btn btn-primary mt-4" >Get in Touch</button> -->
             </nav>
         </div>
     </div>
@@ -263,23 +266,51 @@
             <p>© <span id="currentYear"></span> Min Malla. All rights reserved.</p>
         </div>
     </footer>
+    </div>
 
     <script>
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Mobile menu functionality
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const closeMenu = document.getElementById('closeMenu');
+    // Mobile menu functionality
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-        });
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.add('active');
+    });
 
-        closeMenu.addEventListener('click', () => {
+    closeMenu.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+    });
+
+    // Auto-close menu when a menu link or button is clicked
+    const menuLinks = document.querySelectorAll('.mobile-nav a, .mobile-nav button');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
         });
-    </script>
+    });
+
+    // Auto-close menu when clicking outside
+    document.addEventListener('click', (event) => {
+        const isClickInsideMenu = mobileMenu.contains(event.target);
+        const isClickOnMenuButton = mobileMenuButton.contains(event.target);
+
+        if (!isClickInsideMenu && !isClickOnMenuButton) {
+            mobileMenu.classList.remove('active');
+        }
+    });
+
+    // Auto-close menu on window resize (if width > 768px)
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            mobileMenu.classList.remove('active');
+        }
+    });
+</script>
+
+
 </body>
 </html>
