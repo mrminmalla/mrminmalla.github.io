@@ -105,7 +105,7 @@ img {
 .desktop-nav a {
     margin-left: 1.5rem;
     font-size: 0.875rem;
-    color: var(--gray-600);
+    color: var(--gray-700);
     transition: color 0.2s;
 }
 
